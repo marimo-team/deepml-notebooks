@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-B2ootaw-.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-CxL0S8W7.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-D9fedIX3.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-BTCkDNvf.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-DU3aDxX5.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-CLVRCuM9.ttf" as="font" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        var scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          var element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          var hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          var newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((entries) => {
+          setHeight();
+        });
+        resizeObserver.observe(obj.contentWindow.document.body);
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <marimo-mode data-mode='read' hidden></marimo-mode>
+    <marimo-version data-version='0.10.9' hidden></marimo-version>
+    <marimo-user-config data-config='{"completion": {"activate_on_typing": true, "copilot": false}, "display": {"dataframes": "rich", "cell_output": "above", "code_editor_font_size": 14, "theme": "light", "default_width": "medium"}, "formatting": {"line_length": 79}, "keymap": {"preset": "default", "overrides": {}}, "runtime": {"auto_instantiate": true, "auto_reload": "off", "on_cell_change": "autorun"}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "package_management": {"manager": "pip"}, "server": {"browser": "default", "follow_symlink": false}}' data-overrides='{}' hidden></marimo-user-config>
+    <marimo-app-config data-config='{"width": "compact"}' hidden></marimo-app-config>
+    <marimo-server-token data-token='123' hidden></marimo-server-token>
+    <title>marimo</title>
+    <script type="module" crossorigin src="./assets/index-BWfZxyoz.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-C7Hj70vM.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    <marimo-code hidden="" data-show-code="false">import%20marimo%0A%0A__generated_with%20%3D%20%220.10.9%22%0Aapp%20%3D%20marimo.App()%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20demo_type%20%3D%20mo.ui.dropdown(%0A%20%20%20%20%20%20%20%20options%3D%5B%22K-means%20Interactive%20Demo%22%2C%20%22Iris%20Dataset%20Clustering%22%5D%2C%0A%20%20%20%20%20%20%20%20value%3D%22K-means%20Interactive%20Demo%22%2C%0A%20%20%20%20%20%20%20%20label%3D%22Select%20Demo%22%0A%20%20%20%20)%0A%20%20%20%20return%20(demo_type%2C)%0A%0A%0A%40app.cell%0Adef%20_(demo_type)%3A%0A%20%20%20%20demo_type%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20method%20%3D%20mo.ui.dropdown(%0A%20%20%20%20%20%20%20%20options%3D%5B%22Random%22%2C%20%22Manual%22%5D%2C%0A%20%20%20%20%20%20%20%20value%3D%22Random%22%2C%0A%20%20%20%20%20%20%20%20label%3D%22Generation%20Method%22%0A%20%20%20%20)%0A%20%20%20%20return%20(method%2C)%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20%23%20method%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20points%20%3D%20mo.ui.number(value%3D200%2C%20start%3D10%2C%20stop%3D1000%2C%20label%3D%22Number%20of%20Points%22)%0A%20%20%20%20return%20(points%2C)%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20%23%20points%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20data_clusters%20%3D%20mo.ui.number(value%3D5%2C%20start%3D2%2C%20stop%3D10%2C%20label%3D%22Data%20Clusters%22)%0A%20%20%20%20return%20(data_clusters%2C)%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20%23%20data_clusters%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20k_clusters%20%3D%20mo.ui.number(value%3D5%2C%20start%3D2%2C%20stop%3D10%2C%20label%3D%22Number%20of%20Clusters%22)%0A%20%20%20%20return%20(k_clusters%2C)%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20%23%20k_clusters%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20run_button%20%3D%20mo.ui.button(label%3D%22Run%22)%0A%20%20%20%20return%20(run_button%2C)%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20%23%20run_button%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20random_button%20%3D%20mo.ui.button(label%3D%22Random%22)%0A%20%20%20%20return%20(random_button%2C)%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20%23%20random_button%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(%0A%20%20%20%20KMeans%2C%0A%20%20%20%20ScatterWidget%2C%0A%20%20%20%20data_clusters%2C%0A%20%20%20%20datasets%2C%0A%20%20%20%20demo_type%2C%0A%20%20%20%20k_clusters%2C%0A%20%20%20%20method%2C%0A%20%20%20%20mo%2C%0A%20%20%20%20np%2C%0A%20%20%20%20pd%2C%0A%20%20%20%20points%2C%0A%20%20%20%20px%2C%0A%20%20%20%20random_button%2C%0A%20%20%20%20run_button%2C%0A)%3A%0A%20%20%20%20if%20demo_type.value%20%3D%3D%20%22K-means%20Interactive%20Demo%22%3A%0A%20%20%20%20%20%20%20%20if%20method.value%20%3D%3D%20%22Manual%22%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20widget%20%3D%20mo.ui.anywidget(ScatterWidget())%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20run_button.value%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20X%20%3D%20widget.data_as_pandas%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20not%20X.empty%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20kmeans%20%3D%20KMeans(n_clusters%3Dk_clusters.value%2C%20random_state%3D42)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20clusters%20%3D%20kmeans.fit_predict(X)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20fig%20%3D%20px.scatter(%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20X%2C%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20x%3DX.columns%5B0%5D%2C%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20y%3DX.columns%5B1%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20color%3Dclusters%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20title%3D%22K-means%20Clustering%20(Manual%20Data)%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20display%20%3D%20mo.ui.plotly(fig)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20display%20%3D%20widget%0A%20%20%20%20%20%20%20%20%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20display%20%3D%20widget%0A%20%20%20%20%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20generated_points%20%3D%20np.random.rand(points.value%2C%202)%20*%20500%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20run_button.value%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20kmeans%20%3D%20KMeans(n_clusters%3Dk_clusters.value%2C%20random_state%3D42)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20clusters%20%3D%20kmeans.fit_predict(generated_points)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20fig%20%3D%20px.scatter(%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20x%3Dgenerated_points%5B%3A%2C%200%5D%2C%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20y%3Dgenerated_points%5B%3A%2C%201%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20color%3Dclusters%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20title%3D%22K-means%20Clustering%20(Random%20Data)%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20fig%20%3D%20px.scatter(%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20x%3Dgenerated_points%5B%3A%2C%200%5D%2C%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20y%3Dgenerated_points%5B%3A%2C%201%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20title%3D%22Random%20Points%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20%20%20%20%20display%20%3D%20mo.ui.plotly(fig)%0A%0A%20%20%20%20%20%20%20%20mo.hstack(%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20mo.vstack(%5Bmethod%2C%20points%2C%20data_clusters%2C%20k_clusters%2C%20run_button%2C%20random_button%5D)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20display%0A%20%20%20%20%20%20%20%20%5D)%0A%0A%20%20%20%20elif%20demo_type.value%20%3D%3D%20%22Iris%20Dataset%20Clustering%22%3A%0A%20%20%20%20%20%20%20%20iris%20%3D%20datasets.load_iris()%0A%20%20%20%20%20%20%20%20data%20%3D%20pd.DataFrame(data%3Diris.data%2C%20columns%3Diris.feature_names)%0A%20%20%20%20%20%20%20%20kmeans%20%3D%20KMeans(n_clusters%3Dk_clusters.value%2C%20random_state%3D42)%0A%20%20%20%20%20%20%20%20data%5B'cluster'%5D%20%3D%20kmeans.fit_predict(data)%0A%0A%20%20%20%20%20%20%20%20fig%20%3D%20px.scatter_3d(%0A%20%20%20%20%20%20%20%20%20%20%20%20data%2C%20%0A%20%20%20%20%20%20%20%20%20%20%20%20x%3D'sepal%20length%20(cm)'%2C%20%0A%20%20%20%20%20%20%20%20%20%20%20%20y%3D'sepal%20width%20(cm)'%2C%20%0A%20%20%20%20%20%20%20%20%20%20%20%20z%3D'petal%20length%20(cm)'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20color%3D'cluster'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20title%3D'K-Means%20Clustering%20on%20Iris%20Dataset'%0A%20%20%20%20%20%20%20%20)%0A%0A%20%20%20%20%20%20%20%20mo.vstack(%5Bk_clusters%2C%20mo.ui.plotly(fig)%5D)%0A%20%20%20%20return%20(%0A%20%20%20%20%20%20%20%20X%2C%0A%20%20%20%20%20%20%20%20clusters%2C%0A%20%20%20%20%20%20%20%20data%2C%0A%20%20%20%20%20%20%20%20display%2C%0A%20%20%20%20%20%20%20%20fig%2C%0A%20%20%20%20%20%20%20%20generated_points%2C%0A%20%20%20%20%20%20%20%20iris%2C%0A%20%20%20%20%20%20%20%20kmeans%2C%0A%20%20%20%20%20%20%20%20widget%2C%0A%20%20%20%20)%0A%0A%0A%40app.cell%0Adef%20_(%0A%20%20%20%20data_clusters%2C%0A%20%20%20%20demo_type%2C%0A%20%20%20%20display%2C%0A%20%20%20%20fig%2C%0A%20%20%20%20k_clusters%2C%0A%20%20%20%20method%2C%0A%20%20%20%20mo%2C%0A%20%20%20%20points%2C%0A%20%20%20%20random_button%2C%0A%20%20%20%20run_button%2C%0A)%3A%0A%20%20%20%20%5Bmo.hstack(%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20mo.vstack(%5Bmethod%2C%20points%2C%20data_clusters%2C%20k_clusters%2C%20run_button%2C%20random_button%5D)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20display%0A%20%20%20%20%5D)%20if%20demo_type.value%20%3D%3D%20%22K-means%20Interactive%20Demo%22%20else%20mo.vstack(%5Bk_clusters%2C%20mo.ui.plotly(fig)%5D)%5D%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20%23%20fig%0A%20%20%20%20%23%20display%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%20%20%20%20import%20numpy%20as%20np%0A%20%20%20%20import%20pandas%20as%20pd%0A%20%20%20%20from%20sklearn.cluster%20import%20KMeans%0A%20%20%20%20from%20sklearn%20import%20datasets%0A%20%20%20%20import%20plotly.express%20as%20px%0A%20%20%20%20from%20drawdata%20import%20ScatterWidget%0A%20%20%20%20return%20KMeans%2C%20ScatterWidget%2C%20datasets%2C%20mo%2C%20np%2C%20pd%2C%20px%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
