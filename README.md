@@ -7,10 +7,9 @@ Steps:
     python -m http.server --directory docs/
     ```
 
-Then navigate to localhost:8000 in your browser to view the rendered html-wasm.
+3. Then navigate to localhost:8000 in your browser to view the rendered html-wasm.
 
-The .py files were converted from the .py to .html files using the following command:</br>
-
-```shell
+> [!NOTE] The .py files were converted from the .py to .html files using the following command:</br>
+> ```shell
 marimo export html-wasm notebook.py --mode run --no-show-code -o docs/
 ```
