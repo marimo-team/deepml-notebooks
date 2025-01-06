@@ -61,13 +61,25 @@ def _(mo):
         label="Vector Size (n)"
     )
 
+    _callout = mo.callout(
+        mo.md("""
+            Adjust to see how temperature affects the 'sharpness' of the distribution.
+            
+            **Observe how:**
+        
+            - Higher temperature makes all probabilities more similar
+        
+            - Lower temperature amplifies differences between inputs
+        """),
+        kind="info"
+    )
     controls = mo.vstack([
         mo.md("### Adjust Parameters"),
         mo.hstack([
             mo.vstack([
                 temperature,
                 mo.accordion({
-                    "About Temperature": "Adjust to see how temperature affects the 'sharpness' of the distribution."
+                    "About Temperature": _callout
                 })
             ]),
             mo.vstack([
@@ -128,18 +140,6 @@ def _(mo, temperature, vector_size):
 
             """
         ),
-        mo.callout(
-            mo.md("""
-                **Observe how:**
-
-                - Higher temperature makes all probabilities more similar
-
-                - Lower temperature amplifies differences between inputs
-
-                - The denominator ensures outputs sum to 1
-            """),
-            kind="info"
-        )
     ])
     return (formula_display,)
 
@@ -271,7 +271,7 @@ def _(mo):
         ),
         mo.accordion({
             "Next Steps": mo.md("""
-                1. **Problem solving:** Head over to the Problem Decsription tag and start solving the problem!
+                1. **Problem solving:** Head over to the Problem Decsription tab and start solving the problem!
                 2. **Apply**: Think about where you might use Softmax in your own projects
                 3. **Explore**: Learn about variants like Sparsemax and Gumbel-Softmax
                 4. **Practice**: Implement Softmax from scratch in your preferred framework
@@ -283,9 +283,6 @@ def _(mo):
                 - Knowledge distillation
                 - Temperature scaling for model calibration
             """),
-            "Additional Resources": mo.md("""
-                - Add sources here later
-            """)
         })
     ])
     return (conclusion,)
@@ -294,7 +291,7 @@ def _(mo):
 @app.cell
 def _(mo):
     mo.md(f"""
-    This interactive learning experience was designed to help you understand the Softmax activation function. I hope this resource proves valuable in your exploration of this important topic.
+    This interactive learning experience was designed to help you understand the Softmax activation function. Hope this resource proves valuable in your exploration of this important topic.
     """)
     return
 
