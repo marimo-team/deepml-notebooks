@@ -19,7 +19,7 @@ app = marimo.App()
 def problem_description(mo):
     mo.md(
         r"""
-        # Interactive Matrix Operations: Sums and Means
+        # Matrix Operations: Sums and Means
 
         We explore how to compute sums and means for the rows and columns of a matrix. Let:
 
@@ -84,7 +84,7 @@ def _(mo):
         r"""
         ### Interactive Matrix
 
-        Experiment with the matrix below to understand how row and column operations work.
+        Experiment with the matrix below to understand how row and column operations work. Tip: click and drag to change the matrix values.
         """
     )
     return
@@ -93,7 +93,9 @@ def _(mo):
 @app.cell(hide_code=True)
 def interactive_matrix(Matrix, mo, np):
     # Create single matrix widget
-    matrix = mo.ui.anywidget(Matrix(matrix=np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]), step=0.1))
+    matrix = mo.ui.anywidget(
+        Matrix(matrix=np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]), step=0.1)
+    )
     return (matrix,)
 
 
@@ -103,7 +105,7 @@ def _(matrix):
     return
 
 
-@app.cell(hide_code=True)
+@app.cell
 def calculations(matrix, np, pd):
     def calculate_stats(matrix, dimension):
         arr = np.array(matrix)
@@ -132,6 +134,7 @@ def calculations(matrix, np, pd):
 def step_by_step_display(col_stats, matrix, mo, np, row_stats):
     arr = np.array(matrix.matrix)
 
+
     def generate_row_steps():
         steps = ""
         for i in range(arr.shape[0]):
@@ -140,12 +143,13 @@ def step_by_step_display(col_stats, matrix, mo, np, row_stats):
             sum_val = np.sum(row)
             mean_val = np.mean(row)
 
-            steps += fr"""
+            steps += rf"""
             \[
             \text{{Row {i+1}}}: {sum_expr} = {sum_val:.1f} \text{{ (sum)}}, \frac{{{sum_val:.1f}}}{{{len(row)}}} = {mean_val:.1f} \text{{ (mean)}}
             \]
             """
         return mo.md(steps)
+
 
     def generate_column_steps():
         steps = ""
@@ -155,27 +159,32 @@ def step_by_step_display(col_stats, matrix, mo, np, row_stats):
             sum_val = np.sum(col)
             mean_val = np.mean(col)
 
-            steps += fr"""
+            steps += rf"""
             \[
             \text{{Column {j+1}}}: {sum_expr} = {sum_val:.1f} \text{{ (sum)}}, \frac{{{sum_val:.1f}}}{{{len(col)}}} = {mean_val:.1f} \text{{ (mean)}}
             \]
             """
         return mo.md(steps)
 
+
     # Create tabs for row and column calculations
     tabs_content = {
-        "📊 Row Operations": mo.vstack([
-            mo.md("### Row-wise Calculations"),
-            mo.ui.table(row_stats, show_download=False),
-            mo.md("#### Step-by-Step Row Calculations"),
-            generate_row_steps()
-        ]),
-        "📈 Column Operations": mo.vstack([
-            mo.md("### Column-wise Calculations"),
-            mo.ui.table(col_stats, show_download=False),
-            mo.md("#### Step-by-Step Column Calculations"),
-            generate_column_steps()
-        ])
+        "📊 Row Operations": mo.vstack(
+            [
+                mo.md("### Row-wise Calculations"),
+                mo.ui.table(row_stats, show_download=False),
+                mo.md("#### Step-by-Step Row Calculations"),
+                generate_row_steps(),
+            ]
+        ),
+        "📈 Column Operations": mo.vstack(
+            [
+                mo.md("### Column-wise Calculations"),
+                mo.ui.table(col_stats, show_download=False),
+                mo.md("#### Step-by-Step Column Calculations"),
+                generate_column_steps(),
+            ]
+        ),
     }
 
     mo.ui.tabs(tabs_content)
@@ -188,22 +197,27 @@ def _(success_callout):
     return
 
 
-@app.cell(hide_code=True)
+@app.cell
 def _(mo):
     success_callout = mo.callout(
         "🎉 Great job! You've explored the interactive matrix operations. Now you can proceed to the Problem Description tab to solve the problem!",
-        kind="success"
+        kind="success",
     )
     return (success_callout,)
 
 
-@app.cell(hide_code=True)
+@app.cell
 def _():
     import marimo as mo
+    return (mo,)
+
+
+@app.cell
+def _():
     import numpy as np
     import pandas as pd
     from wigglystuff import Matrix
-    return Matrix, mo, np, pd
+    return Matrix, np, pd
 
 
 if __name__ == "__main__":
