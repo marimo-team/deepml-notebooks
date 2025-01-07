@@ -2,8 +2,6 @@
 # requires-python = ">=3.12"
 # dependencies = [
 #     "marimo",
-#     "pandas==2.2.3",
-#     "altair==5.5.0",
 #     "wigglystuff==0.1.7",
 #     "numpy==2.2.1",
 # ]
