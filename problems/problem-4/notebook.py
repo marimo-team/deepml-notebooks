@@ -106,7 +106,7 @@ def _(matrix):
 
 
 @app.cell
-def calculations(matrix, np, pd):
+def calculations(matrix, np):
     def calculate_stats(matrix, dimension):
         arr = np.array(matrix)
         if dimension == "row":
@@ -118,11 +118,11 @@ def calculations(matrix, np, pd):
             means = np.mean(arr, axis=0)
             labels = [f"Column {i+1}" for i in range(arr.shape[1])]
 
-        return pd.DataFrame({
+        return {
             "Dimension": labels,
-            "Sum": sums,
-            "Mean": means
-        })
+            "Sum": list(sums),
+            "Mean": list(means)
+        }
 
     # Calculate both row and column statistics
     row_stats = calculate_stats(matrix.matrix, "row")
@@ -130,7 +130,7 @@ def calculations(matrix, np, pd):
     return calculate_stats, col_stats, row_stats
 
 
-@app.cell(hide_code=True)
+@app.cell
 def step_by_step_display(col_stats, matrix, mo, np, row_stats):
     arr = np.array(matrix.matrix)
 
@@ -215,9 +215,8 @@ def _():
 @app.cell
 def _():
     import numpy as np
-    import pandas as pd
     from wigglystuff import Matrix
-    return Matrix, np, pd
+    return Matrix, np
 
 
 if __name__ == "__main__":
