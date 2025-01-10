@@ -10,11 +10,11 @@
 
 import marimo
 
-__generated_with = "0.10.9"
+__generated_with = "0.10.10"
 app = marimo.App()
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(mo):
     mo.md(
         r"""
@@ -73,7 +73,6 @@ def _(mo):
             """),
         }
     )
-
     return
 
 
@@ -111,8 +110,8 @@ def _(mo):
 
 
 @app.cell
-def _(file_upload):
-    file_upload
+def _(file_upload, source_selector):
+    file_upload if source_selector.value == "Upload Image" else None
     return
 
 
@@ -187,7 +186,7 @@ def _(file_upload, mo, process_image, source_selector):
 
 
 @app.cell
-def _(calculate_contrast, img, img_array, io, mo, np, plt):
+def _(calculate_contrast, img_array, io, mo, np, plt):
     # Ensure image array exists
     mo.stop(
         img_array is None,
@@ -291,7 +290,7 @@ def _(calculate_contrast, img, img_array, io, mo, np, plt):
     )
 
     # Final display layout
-    display = mo.vstack([img.center(), method_tabs])
+    display = method_tabs
     return (
         ax,
         basic_contrast,
@@ -306,6 +305,12 @@ def _(calculate_contrast, img, img_array, io, mo, np, plt):
         rms_contrast,
         rms_tab,
     )
+
+
+@app.cell
+def _(img):
+    img.center()
+    return
 
 
 @app.cell
