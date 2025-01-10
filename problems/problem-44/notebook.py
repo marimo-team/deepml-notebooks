@@ -264,9 +264,14 @@ def _(conclusion):
 @app.cell(hide_code=True)
 def _():
     import marimo as mo
+    return (mo,)
+
+
+@app.cell(hide_code=True)
+def _():
     import numpy as np
     import matplotlib.pyplot as plt
-    return mo, np, plt
+    return np, plt
 
 
 if __name__ == "__main__":
