@@ -135,11 +135,11 @@ def _(mo, steepness):
             \\]
 
             Key points at current steepness:
-            
+
             - Center point at z = 0, where σ(0) = 0.5
-            
+
             - As z → ∞, σ(z) → 1
-            
+
             - As z → -∞, σ(z) → 0
             """
         ),
@@ -271,12 +271,17 @@ def _(conclusion):
     return
 
 
-@app.cell(hide_code=True)
+@app.cell
 def _():
     import marimo as mo
+    return (mo,)
+
+
+@app.cell(hide_code=True)
+def _():
     import numpy as np
     import matplotlib.pyplot as plt
-    return mo, np, plt
+    return np, plt
 
 
 if __name__ == "__main__":
