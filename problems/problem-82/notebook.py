@@ -133,8 +133,9 @@ def _(Image, io, mo, np):
 
     @mo.cache
     def process_image(image_data=None, use_sample=False):
+        img_path = mo.notebook_location() / "public" / "marimo x deep-ml.png"
         if use_sample:
-            img = Image.open("./assets/marimo x deep-ml.png").convert("L")
+            img = Image.open(img_path).convert("L")
         elif image_data:
             img = Image.open(io.BytesIO(image_data)).convert("L")
         else:
