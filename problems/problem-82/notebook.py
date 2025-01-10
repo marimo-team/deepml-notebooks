@@ -10,7 +10,7 @@
 
 import marimo
 
-__generated_with = "0.10.10"
+__generated_with = "0.10.11"
 app = marimo.App()
 
 
