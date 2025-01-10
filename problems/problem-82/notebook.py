@@ -133,6 +133,7 @@ def _(Image, io, mo, np):
 
     @mo.cache
     def process_image(image_data=None, use_sample=False):
+        # TODO: Image path needs to be fixed for sample image; rerun when new version is rolled out
         img_path = mo.notebook_location() / "public" / "marimo x deep-ml.png"
         if use_sample:
             img = Image.open(img_path).convert("L")
