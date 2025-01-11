@@ -9,7 +9,7 @@
 
 import marimo
 
-__generated_with = "0.10.10"
+__generated_with = "0.10.12"
 app = marimo.App()
 
 
@@ -209,9 +209,9 @@ def _(mo):
                 You've explored the ReLU function interactively. You've learned:
 
                 - How ReLU maps negative inputs to zero
-                - Why it's computationally efficient
-                - Its role in introducing non-linearity
-                - How it helps with the vanishing gradient problem
+                - How to visualize the function across different input ranges
+                - The relationship between input values and their corresponding outputs
+                - How to test specific input values and observe their ReLU transformations
             """),
             kind="success"
         ),
