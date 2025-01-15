@@ -12,7 +12,7 @@
 
 import marimo
 
-__generated_with = "0.10.9"
+__generated_with = "0.10.12"
 app = marimo.App()
 
 
@@ -41,9 +41,9 @@ def _(mo):
             1. **Initialization**: Randomly place k centroids in the feature space
             2. **Assignment**: Assign each point to the nearest centroid using Euclidean distance (or a suitable distance metric like Manhattan (City Block distance), Minkowski distance, etc.):
 
-               \\[
-               d(x_i, \\mu_j) = \\sqrt{\\sum_{d=1}^{D} (x_{id} - \\mu_{jd})^2}
-               \\]
+           \\[
+           d(x_i, \\mu_j) = \\sqrt{\\sum_{d=1}^{D} (x_{id} - \\mu_{jd})^2}
+           \\]
 
             3. **Update**: Recompute centroids as the mean of assigned points
             4. **Repeat**: Steps 2-3 until convergence
@@ -60,6 +60,7 @@ def _(mo):
             - $\\mu_j$ is the centroid of cluster $j$
             """)
     })
+
     return (intro,)
 
 
