@@ -39,7 +39,6 @@ def _(mo):
     1. **Index Randomization**: 
 
            - Generate an array of indices: $\text{indices} = [0, 1, 2, \ldots, n-1]$
-
            - Apply a random permutation: $\text{shuffled\_indices} = \text{shuffle}(\text{indices})$
 
     2. **Data Reordering**:
@@ -72,7 +71,7 @@ def _(mo):
     # Interactive Seed Selection
     seed_slider = mo.ui.slider(
         start=0, 
-        stop=100, 
+        stop=1000,  # Increased range for more variability 
         step=1, 
         value=42,
         label="Random Seed"
@@ -82,7 +81,7 @@ def _(mo):
 
 @app.cell
 def _(mo, np, seed_slider):
-    # demonstrzate shuffling
+    # demonstrate shuffling
     def shuffle_dataset(X, y, seed=None):
         """
         Shuffle two numpy arrays while maintaining their correspondence.
@@ -99,16 +98,31 @@ def _(mo, np, seed_slider):
         if seed is not None:
             np.random.seed(seed)
 
+        # shuffling indices
         indices = np.random.permutation(len(X))
 
+        # Apply shuffling
         return X[indices], y[indices]
 
-    # Example Dataset
-    X = np.array([[1, 2], [3, 4], [5, 6], [7, 8]])
-    y = np.array([1, 2, 3, 4])
+    # Create a dataset
+    def generate_dataset(seed=None):
+        if seed is not None:
+            np.random.seed(seed)
 
+        # Create a more complex dataset
+        n_samples = 50
+        X = np.random.randn(n_samples, 2)
+
+        # Create labels with some structure
+        y = (X[:, 0] + X[:, 1] > 0).astype(int)
+
+        return X, y
+
+    # initial dataset
+    X, y = generate_dataset()
     X_shuffled, y_shuffled = shuffle_dataset(X, y, seed=seed_slider.value)
 
+    # Display original and shuffled datasets
     original_table = mo.ui.table(
         data={
             "Original X": list(map(list, X)),
@@ -127,6 +141,7 @@ def _(mo, np, seed_slider):
     return (
         X,
         X_shuffled,
+        generate_dataset,
         original_table,
         shuffle_dataset,
         shuffled_table,
@@ -136,34 +151,44 @@ def _(mo, np, seed_slider):
 
 
 @app.cell
-def _(X, X_shuffled, mo, plt, seed_slider, y, y_shuffled):
-    # Visualization of the shuffling
+def _(generate_dataset, mo, plt, seed_slider):
+    # Visualization of shuffling
     def create_scatter_plot(X, y, title):
-        plt.figure(figsize=(6, 4))
-        plt.clf()  # Clear the current figure
-        plt.scatter(X[:, 0], X[:, 1], c=y, cmap='viridis', alpha=0.7)
+        plt.figure(figsize=(8, 6))
+        plt.clf()  # Clear previous plot
+        scatter = plt.scatter(X[:, 0], X[:, 1], c=y, cmap='viridis', alpha=0.7)
         plt.title(title)
         plt.xlabel("Feature 1")
         plt.ylabel("Feature 2")
-        plt.colorbar(label="Label")
+        plt.colorbar(scatter, label="Label")
+        plt.grid(True, linestyle='--', alpha=0.7)
 
+        # Save the plot to a BytesIO object
         from io import BytesIO
         buf = BytesIO()
-        plt.savefig(buf, format='png')
+        plt.savefig(buf, format='png', dpi=300)
         buf.seek(0)
         plt.close()
 
         return buf
 
-    # Dynamically generate plots based on current seed value (from slider)
-    plots_layout = mo.ui.tabs({
-        "Original Dataset": mo.image(create_scatter_plot(X, y, f"Original Dataset")),
-        "Shuffled Dataset": mo.image(create_scatter_plot(X_shuffled, y_shuffled, f"Shuffled Dataset (Seed: {seed_slider.value})"))
-    })
-    return create_scatter_plot, plots_layout
+    # generate plots
+    def generate_plots(seed):
+        # Regenerate dataset with new seed
+        X_orig, y_orig = generate_dataset()
+        X_shuf, y_shuf = generate_dataset(seed=seed)
+
+        return mo.ui.tabs({
+            "Original Dataset": mo.image(create_scatter_plot(X_orig, y_orig, "Original Dataset")),
+            f"Shuffled Dataset (Seed: {seed})": mo.image(create_scatter_plot(X_shuf, y_shuf, f"Shuffled Dataset (Seed: {seed})"))
+        })
+
+    # Initial plots
+    plots_layout = generate_plots(seed_slider.value)
+    return create_scatter_plot, generate_plots, plots_layout
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(mo, original_table, plots_layout, shuffled_table):
     # Combine tables and plots
     mo.vstack([
@@ -174,11 +199,12 @@ def _(mo, original_table, plots_layout, shuffled_table):
     return
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(mo):
     # Key Learning Points
     key_points = mo.md(r"""
     ### 🔑 Key Insights
+
 
         - Numpy's `permutation()` creates random indices
 
