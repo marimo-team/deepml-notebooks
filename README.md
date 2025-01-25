@@ -1,5 +1,8 @@
 ﻿# deepml-notebooks
 
+> [!IMPORTANT]  
+> The repo is now archived and interactive notebooks will directly be pushed to the [DML-OpenProblem](https://github.com/Open-Deep-ML/DML-OpenProblem) repo.
+
 Steps:
 1. `cd` to the appropriate problems/problem directory
 2. To run the exported notebook, use:
