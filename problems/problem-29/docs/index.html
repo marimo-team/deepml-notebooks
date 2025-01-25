@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-B2ootaw-.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-CxL0S8W7.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-D9fedIX3.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-BTCkDNvf.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-DU3aDxX5.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-CLVRCuM9.ttf" as="font" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        var scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          var element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          var hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          var newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((entries) => {
+          setHeight();
+        });
+        resizeObserver.observe(obj.contentWindow.document.body);
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <marimo-mode data-mode='read' hidden></marimo-mode>
+    <marimo-version data-version='0.10.17' hidden></marimo-version>
+    <marimo-user-config data-config='{"completion": {"activate_on_typing": true, "copilot": false}, "display": {"theme": "dark", "default_width": "medium", "dataframes": "rich", "code_editor_font_size": 14, "cell_output": "above"}, "formatting": {"line_length": 79}, "keymap": {"preset": "default", "overrides": {}}, "runtime": {"auto_instantiate": true, "auto_reload": "off", "on_cell_change": "autorun"}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "package_management": {"manager": "pip"}, "server": {"browser": "default", "follow_symlink": false}, "snippets": {"custom_paths": [], "include_default_snippets": true}}' data-overrides='{}' hidden></marimo-user-config>
+    <marimo-app-config data-config='{"width": "compact"}' hidden></marimo-app-config>
+    <marimo-server-token data-token='123' hidden></marimo-server-token>
+    <title>marimo</title>
+    <script type="module" crossorigin src="./assets/index-UhR0gcZS.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-CRGfAcwh.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    
+    <style>
+        #save-button {
+            display: none !important;
+        }
+        #filename-input {
+            display: none !important;
+        }
+    </style>
+    <marimo-code hidden="" data-show-code="false">import%20marimo%0A%0A__generated_with%20%3D%20%220.10.17%22%0Aapp%20%3D%20marimo.App()%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20%23%20Title%20and%20Introduction%20with%20LaTeX%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%20%20%20%20%23%20Random%20Dataset%20Shuffling%20in%20Machine%20Learning%0A%0A%20%20%20%20%20%20%20%20%23%23%20Understanding%20Data%20Randomization%0A%0A%20%20%20%20%20%20%20%20In%20Machine%20Learning%2C%20**dataset%20shuffling**%20is%20a%20critical%20preprocessing%20technique%20that%20ensures%20unbiased%20model%20training.%20This%20interactive%20notebook%20explores%20the%20working%20of%20randomly%20shuffling%20datasets%20while%20maintaining%20the%20crucial%20correspondence%20between%20features%20and%20labels.%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20).center()%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20%23%20Mathematical%20Explanation%20with%20Accordion%0A%20%20%20%20math_explanation%20%3D%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%23%20The%20Shuffling%20Process%0A%0A%20%20%20%20Key%20mathematical%20principles%20of%20dataset%20shuffling%3A%0A%0A%20%20%20%201.%20**Index%20Randomization**%3A%20%0A%0A%20%20%20%20%20%20%20%20%20%20%20-%20Generate%20an%20array%20of%20indices%3A%20%24%5Ctext%7Bindices%7D%20%3D%20%5B0%2C%201%2C%202%2C%20%5Cldots%2C%20n-1%5D%24%0A%20%20%20%20%20%20%20%20%20%20%20-%20Apply%20a%20random%20permutation%3A%20%24%5Ctext%7Bshuffled%5C_indices%7D%20%3D%20%5Ctext%7Bshuffle%7D(%5Ctext%7Bindices%7D)%24%0A%0A%20%20%20%202.%20**Data%20Reordering**%3A%0A%20%20%20%20%20%20%20For%20features%20%24X%24%20and%20labels%20%24y%24%3A%0A%20%20%20%20%20%20%20%24X_%7B%5Ctext%7Bshuffled%7D%7D%20%3D%20X%5B%5Ctext%7Bshuffled%5C_indices%7D%5D%24%0A%20%20%20%20%20%20%20%24y_%7B%5Ctext%7Bshuffled%7D%7D%20%3D%20y%5B%5Ctext%7Bshuffled%5C_indices%7D%5D%24%0A%0A%20%20%20%20This%20ensures%3A%0A%0A%20%20%20%20-%20Random%20distribution%20of%20data%0A%0A%20%20%20%20-%20Preservation%20of%20feature-label%20pairs%0A%0A%20%20%20%20-%20Potential%20reduction%20of%20learning%20biases%0A%20%20%20%20%22%22%22)%0A%0A%20%20%20%20%23%20Use%20an%20Accordion%20to%20make%20the%20mathematical%20explanation%20interactive%0A%20%20%20%20mo.accordion(%7B%22%F0%9F%94%A2%20Mathematical%20Foundations%22%3A%20math_explanation%7D)%0A%20%20%20%20return%20(math_explanation%2C)%0A%0A%0A%40app.cell%0Adef%20_(seed_slider)%3A%0A%20%20%20%20seed_slider%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20%23%20Interactive%20Seed%20Selection%0A%20%20%20%20seed_slider%20%3D%20mo.ui.slider(%0A%20%20%20%20%20%20%20%20start%3D0%2C%20%0A%20%20%20%20%20%20%20%20stop%3D1000%2C%20%20%23%20Increased%20range%20for%20more%20variability%20%0A%20%20%20%20%20%20%20%20step%3D1%2C%20%0A%20%20%20%20%20%20%20%20value%3D42%2C%0A%20%20%20%20%20%20%20%20label%3D%22Random%20Seed%22%0A%20%20%20%20)%0A%20%20%20%20return%20(seed_slider%2C)%0A%0A%0A%40app.cell%0Adef%20_(mo%2C%20np%2C%20seed_slider)%3A%0A%20%20%20%20%23%20demonstrate%20shuffling%0A%20%20%20%20def%20shuffle_dataset(X%2C%20y%2C%20seed%3DNone)%3A%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20Shuffle%20two%20numpy%20arrays%20while%20maintaining%20their%20correspondence.%0A%0A%20%20%20%20%20%20%20%20Args%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20X%20(np.ndarray)%3A%20Feature%20matrix%0A%20%20%20%20%20%20%20%20%20%20%20%20y%20(np.ndarray)%3A%20Label%20vector%0A%20%20%20%20%20%20%20%20%20%20%20%20seed%20(int%2C%20optional)%3A%20Random%20seed%20for%20reproducibility%0A%0A%20%20%20%20%20%20%20%20Returns%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20tuple%3A%20Shuffled%20(X%2C%20y)%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20%23%20Set%20random%20seed%20for%20reproducibility%0A%20%20%20%20%20%20%20%20if%20seed%20is%20not%20None%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20np.random.seed(seed)%0A%0A%20%20%20%20%20%20%20%20%23%20shuffling%20indices%0A%20%20%20%20%20%20%20%20indices%20%3D%20np.random.permutation(len(X))%0A%0A%20%20%20%20%20%20%20%20%23%20Apply%20shuffling%0A%20%20%20%20%20%20%20%20return%20X%5Bindices%5D%2C%20y%5Bindices%5D%0A%0A%20%20%20%20%23%20Create%20a%20dataset%0A%20%20%20%20def%20generate_dataset(seed%3DNone)%3A%0A%20%20%20%20%20%20%20%20if%20seed%20is%20not%20None%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20np.random.seed(seed)%0A%0A%20%20%20%20%20%20%20%20%23%20Create%20a%20more%20complex%20dataset%0A%20%20%20%20%20%20%20%20n_samples%20%3D%2050%0A%20%20%20%20%20%20%20%20X%20%3D%20np.random.randn(n_samples%2C%202)%0A%0A%20%20%20%20%20%20%20%20%23%20Create%20labels%20with%20some%20structure%0A%20%20%20%20%20%20%20%20y%20%3D%20(X%5B%3A%2C%200%5D%20%2B%20X%5B%3A%2C%201%5D%20%3E%200).astype(int)%0A%0A%20%20%20%20%20%20%20%20return%20X%2C%20y%0A%0A%20%20%20%20%23%20initial%20dataset%0A%20%20%20%20X%2C%20y%20%3D%20generate_dataset()%0A%20%20%20%20X_shuffled%2C%20y_shuffled%20%3D%20shuffle_dataset(X%2C%20y%2C%20seed%3Dseed_slider.value)%0A%0A%20%20%20%20%23%20Display%20original%20and%20shuffled%20datasets%0A%20%20%20%20original_table%20%3D%20mo.ui.table(%0A%20%20%20%20%20%20%20%20data%3D%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%22Original%20X%22%3A%20list(map(list%2C%20X))%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%22Original%20y%22%3A%20list(y)%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20label%3D%22Original%20Dataset%22%0A%20%20%20%20)%0A%0A%20%20%20%20shuffled_table%20%3D%20mo.ui.table(%0A%20%20%20%20%20%20%20%20data%3D%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%22Shuffled%20X%22%3A%20list(map(list%2C%20X_shuffled))%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%22Shuffled%20y%22%3A%20list(y_shuffled)%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20label%3D%22Shuffled%20Dataset%22%0A%20%20%20%20)%0A%20%20%20%20return%20(%0A%20%20%20%20%20%20%20%20X%2C%0A%20%20%20%20%20%20%20%20X_shuffled%2C%0A%20%20%20%20%20%20%20%20generate_dataset%2C%0A%20%20%20%20%20%20%20%20original_table%2C%0A%20%20%20%20%20%20%20%20shuffle_dataset%2C%0A%20%20%20%20%20%20%20%20shuffled_table%2C%0A%20%20%20%20%20%20%20%20y%2C%0A%20%20%20%20%20%20%20%20y_shuffled%2C%0A%20%20%20%20)%0A%0A%0A%40app.cell%0Adef%20_(generate_dataset%2C%20mo%2C%20plt%2C%20seed_slider)%3A%0A%20%20%20%20%23%20Visualization%20of%20shuffling%0A%20%20%20%20def%20create_scatter_plot(X%2C%20y%2C%20title)%3A%0A%20%20%20%20%20%20%20%20plt.figure(figsize%3D(8%2C%206))%0A%20%20%20%20%20%20%20%20plt.clf()%20%20%23%20Clear%20previous%20plot%0A%20%20%20%20%20%20%20%20scatter%20%3D%20plt.scatter(X%5B%3A%2C%200%5D%2C%20X%5B%3A%2C%201%5D%2C%20c%3Dy%2C%20cmap%3D'viridis'%2C%20alpha%3D0.7)%0A%20%20%20%20%20%20%20%20plt.title(title)%0A%20%20%20%20%20%20%20%20plt.xlabel(%22Feature%201%22)%0A%20%20%20%20%20%20%20%20plt.ylabel(%22Feature%202%22)%0A%20%20%20%20%20%20%20%20plt.colorbar(scatter%2C%20label%3D%22Label%22)%0A%20%20%20%20%20%20%20%20plt.grid(True%2C%20linestyle%3D'--'%2C%20alpha%3D0.7)%0A%0A%20%20%20%20%20%20%20%20%23%20Save%20the%20plot%20to%20a%20BytesIO%20object%0A%20%20%20%20%20%20%20%20from%20io%20import%20BytesIO%0A%20%20%20%20%20%20%20%20buf%20%3D%20BytesIO()%0A%20%20%20%20%20%20%20%20plt.savefig(buf%2C%20format%3D'png'%2C%20dpi%3D300)%0A%20%20%20%20%20%20%20%20buf.seek(0)%0A%20%20%20%20%20%20%20%20plt.close()%0A%0A%20%20%20%20%20%20%20%20return%20buf%0A%0A%20%20%20%20%23%20generate%20plots%0A%20%20%20%20def%20generate_plots(seed)%3A%0A%20%20%20%20%20%20%20%20%23%20Regenerate%20dataset%20with%20new%20seed%0A%20%20%20%20%20%20%20%20X_orig%2C%20y_orig%20%3D%20generate_dataset()%0A%20%20%20%20%20%20%20%20X_shuf%2C%20y_shuf%20%3D%20generate_dataset(seed%3Dseed)%0A%0A%20%20%20%20%20%20%20%20return%20mo.ui.tabs(%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%22Original%20Dataset%22%3A%20mo.image(create_scatter_plot(X_orig%2C%20y_orig%2C%20%22Original%20Dataset%22))%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20f%22Shuffled%20Dataset%20(Seed%3A%20%7Bseed%7D)%22%3A%20mo.image(create_scatter_plot(X_shuf%2C%20y_shuf%2C%20f%22Shuffled%20Dataset%20(Seed%3A%20%7Bseed%7D)%22))%0A%20%20%20%20%20%20%20%20%7D)%0A%0A%20%20%20%20%23%20Initial%20plots%0A%20%20%20%20plots_layout%20%3D%20generate_plots(seed_slider.value)%0A%20%20%20%20return%20create_scatter_plot%2C%20generate_plots%2C%20plots_layout%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo%2C%20original_table%2C%20plots_layout%2C%20shuffled_table)%3A%0A%20%20%20%20%23%20Combine%20tables%20and%20plots%0A%20%20%20%20mo.vstack(%5B%0A%20%20%20%20%20%20%20%20mo.md(%22%23%23%20Dataset%20Shuffling%20Demonstration%22)%2C%0A%20%20%20%20%20%20%20%20mo.hstack(%5Boriginal_table%2C%20shuffled_table%5D)%2C%0A%20%20%20%20%20%20%20%20plots_layout%0A%20%20%20%20%5D)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20%23%20Key%20Learning%20Points%0A%20%20%20%20key_points%20%3D%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%23%20%F0%9F%94%91%20Key%20Insights%0A%0A%0A%20%20%20%20%20%20%20%20-%20Numpy's%20%60permutation()%60%20creates%20random%20indices%0A%0A%20%20%20%20%20%20%20%20-%20Shuffling%20maintains%20feature-label%20correspondence%0A%0A%20%20%20%20%20%20%20%20-%20Random%20seed%20ensures%20reproducible%20shuffling%0A%20%20%20%20%22%22%22)%0A%0A%20%20%20%20%23%20Use%20a%20Callout%20to%20highlight%20key%20points%0A%20%20%20%20mo.callout(key_points%2C%20kind%3D%22success%22)%0A%20%20%20%20return%20(key_points%2C)%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%20%20%20%20return%20(mo%2C)%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20numpy%20as%20np%0A%20%20%20%20import%20matplotlib.pyplot%20as%20plt%0A%20%20%20%20return%20np%2C%20plt%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
